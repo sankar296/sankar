@@ -3,5 +3,5 @@ void main()
 {
 int c;
 c=5+6;
-printf("%d", c);
-}
+printf("%d%d", c,c;
+i}
