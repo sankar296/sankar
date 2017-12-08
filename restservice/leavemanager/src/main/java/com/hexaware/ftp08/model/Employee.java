@@ -1,7 +1,7 @@
 package com.hexaware.ftp08.model;
 
 import com.hexaware.ftp08.persistence.DbConnection;
-import com.hexaware.ftp08.persistence.EmployeeDAO;
+import com.hexaware.ftp08.persistence.LeaveDetalsDAO;
 
 import java.util.Objects;
 import java.util.List;
@@ -231,29 +231,29 @@ public class Employee {
   }
 
   /**
-   * The dao for employee.
+   * The dao for leavedetails.
    */
-  private static EmployeeDAO dao() {
+  private static LeaveDetailsDAO dao() {
     DbConnection db = new DbConnection();
-    return db.getConnect().onDemand(EmployeeDAO.class);
+    return db.getConnect().onDemand(LeaveDetailsDAO.class);
   }
 
   /**
    * list all employee details.
    * @return all employees' details
    */
-  public static Employee[] listAll() {
+  public static LeaveDetails[] listAll() {
 
-    List<Employee> es = dao().list();
-    return es.toArray(new Employee[es.size()]);
+    List<LeaveHistory> es = dao().list();
+    return es.toArray(new LeaveHistory[es.size()]);
   }
 
   /**
    * list employee details by id.
-   * @param empID id to get employee details.
+   * @param ec mpID id to get employee details.
    * @return Employee
    */
-  public static Employee listById(final int empID) {
+  public static LeaveDetails listById(final int empID) {
     return dao().find(empID);
   }
 
