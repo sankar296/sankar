@@ -1,10 +1,13 @@
 package com.hexaware.ftp08.model;
 
 import com.hexaware.ftp08.persistence.DbConnection;
-import com.hexaware.ftp08.persistence.LeaveDetalsDAO;
+import com.hexaware.ftp08.persistence.EmployeeDAO;
 
 import java.util.Objects;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Employee class to store employee personal details.
@@ -231,30 +234,79 @@ public class Employee {
   }
 
   /**
-   * The dao for leavedetails.
+   * The dao for employee.
    */
-  private static LeaveDetailsDAO dao() {
+  private static EmployeeDAO dao() {
     DbConnection db = new DbConnection();
-    return db.getConnect().onDemand(LeaveDetailsDAO.class);
+    return db.getConnect().onDemand(EmployeeDAO.class);
   }
 
   /**
    * list all employee details.
    * @return all employees' details
    */
-  public static LeaveDetails[] listAll() {
+  public static Employee[] listAll() {
 
-    List<LeaveHistory> es = dao().list();
-    return es.toArray(new LeaveHistory[es.size()]);
+    List<Employee> es = dao().list();
+    return es.toArray(new Employee[es.size()]);
   }
 
   /**
    * list employee details by id.
-   * @param ec mpID id to get employee details.
+   * @param empID id to get employee details.
    * @return Employee
    */
-  public static LeaveDetails listById(final int empID) {
+  public static Employee listById(final int empID) {
     return dao().find(empID);
   }
 
+  /**
+ * insert employee leave details.
+ * @param startDate to get employee details.
+ * @param endDate to get employee details.
+ * @param reason to get employee reason.
+ * @param empId to get employee id.
+ * @param days to get leave number of days.
+ * appliedDate for inserting applied on Date
+ * @param leaveBal to get the leave balance.
+ * diff for calculating difference between dates
+ * numberOfDays to store number of days
+ * @throws ParseException throws Parse Exception
+ */
+  public static void applyLeave(final String startDate, final String endDate,
+                                final String reason, final int empId, final int days, final int leaveBal) {
+    try {
+      java.util.Date dt1 = new SimpleDateFormat("yyyy/MM/dd").parse(startDate);
+      java.sql.Date sDate = new java.sql.Date(dt1.getTime());
+      java.util.Date dt2 = new SimpleDateFormat("yyyy/MM/dd").parse(endDate);
+      java.sql.Date eDate = new java.sql.Date(dt2.getTime());
+      long diff = dt2.getTime() - dt1.getTime();
+      int numberOfDays = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+      java.sql.Date appliedDate = new java.sql.Date(new java.util.Date().getTime());
+      if (sDate.after(appliedDate) && eDate.after(appliedDate) && (eDate.after(sDate) || eDate.equals(sDate))
+          && days <= (numberOfDays + 1)) {
+        dao().insert(sDate, eDate, days, appliedDate, reason, empId);
+        dao().leaveBal(leaveBal, empId);
+        if (listById(empId).getEmpMgrId() == 0) {
+          dao().autoApproved(empId);
+        }
+      } else {
+        System.out.println("Either Start date or End date is incorrect: Please enter correct dates");
+      }
+
+    } catch (ParseException e) {
+      System.out.println("Please enter date in correct format");
+    }
+  }
+
+  /**
+  * list the manager id.
+  * @return this list
+  * @param empId to get employee id.
+  */
+  public static Employee listManager(final int empId) {
+    return dao().listMgr(empId);
+  }
+
 }
+
