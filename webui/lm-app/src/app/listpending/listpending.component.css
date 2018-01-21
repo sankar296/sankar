@@ -1,0 +1,23 @@
+.table tr.active td {
+    background-color:#123456;
+    color: white;
+  }
+.highlighted{
+    background: #E8EFAE;
+}
+
+.deHighlighted{
+    background:white;
+}
+#t2{
+    background-color:#7c8b9c;
+}
+#tr2{
+    background:#51A9AC;
+}
+#d1{
+    margin:auto;
+    
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}

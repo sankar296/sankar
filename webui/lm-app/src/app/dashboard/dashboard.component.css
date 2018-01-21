@@ -1,0 +1,50 @@
+#div{ 
+    margin:auto;
+    display:block;
+    vertical-align:middle;
+    clear: both;
+    position:relative;
+    width:80%;
+  
+}
+#d1{
+    margin-left:420px;
+    display:block;
+    vertical-align:middle;
+    clear: both;
+    height:335px;
+    margin-top:10px;
+    border:5px solid #293500;
+
+    
+}
+
+#d2{
+    position:absolute;
+    top:0px;
+    margin-left:5px;
+    width:400px;
+    display:block;
+    height:333px;
+    border:5px solid #293500;
+  
+    
+}
+
+#d3{
+    margin:auto;
+    display:block;
+    clear: both;
+    left:20px;
+    overflow:hidden;
+    border:5px solid #293500;
+}
+
+#d4{
+    margin-top:10px;
+    display:block;
+    clear: both;
+    left:20px;
+    border:5px solid #293500;
+
+}

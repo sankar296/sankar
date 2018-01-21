@@ -1,0 +1,26 @@
+.val{
+    text-align:center;
+}
+
+#main{
+    margin:auto;
+    margin-top:40px;
+}
+
+.btntd{
+    text-align:center;
+}
+
+#d1{
+    width:50%;
+    margin:auto;
+    margin-top:20px;
+    color:#898D5A;
+}
+
+.name{
+    color: #394A0F;
+    text-align:center;
+    font-weight:bold;
+    font-family:verdana;
+}

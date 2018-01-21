@@ -1,0 +1,79 @@
+<div class="well well-lg" id="d1">
+<table id="main">
+	<tr>
+    	<td class="name">StartDate</td>
+        <td class="val">:</td>
+        <td><input type="date" placeholder="startdate" class="form-control" [(ngModel)]='leavedetails.leaStartDate' #startDate="ngModel" required></td>
+    </tr>
+
+    <tr>
+        <td colspan="3" class="val"><div *ngIf="startDate.errors?.required && startDate.touched" class="alert alert-danger">Start Date required</div></td>
+    </tr>
+    <tr>
+        <td colspan="3">&nbsp;</td>
+    </tr>
+
+    <tr>
+    	<td class="name">EndDate</td>
+        <td class="val">:</td>
+        <td><input type="date" placeholder="endtdate" class="form-control "[(ngModel)]="leavedetails.leaEndDate" #endDate="ngModel" required></td>
+    </tr>
+
+    <tr>
+        <td colspan="3" class="val"><div *ngIf="endDate.errors?.required && endDate.touched" class="alert alert-danger">End Date required</div></td>
+    </tr>
+    <tr>
+        <td colspan="3">&nbsp;</td>
+    </tr>
+
+    <tr>
+    	<td class="name">Number of Days</td>
+        <td class="val">:</td>
+        <td><input type="number" min=0 placeholder="00" class="form-control" [(ngModel)]="leavedetails.leaNoOfDays" #days="ngModel" required></td>
+    </tr>
+    <tr>
+        <td colspan="3" class="val"><div *ngIf="days.errors?.required && days.touched" class="alert alert-danger">Number of Days required</div></td>
+    </tr>
+    <tr>
+        <td colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+    	<td class="name">Leave Type</td>
+        <td class="val">:</td>
+        <td>
+        	<select>
+        		<option>EL</option>	
+            </select>
+        </td>
+    </tr>
+
+        <tr>
+            <td></td>
+        </tr>
+    <tr>
+        <td colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+    	<td class="name">Leave Reason</td>
+        <td class="val">:</td>
+        <td><textarea rows="8" column="200" class="form-control" [(ngModel)]="leavedetails.leaReason" name="name" #reason="ngModel" required></textarea></td>
+    </tr>
+    <tr>
+        <td colspan="3" class="val"><div *ngIf="reason.errors?.required && reason.touched" class="alert alert-danger">Name is required</div></td>
+    </tr>
+    <tr>
+        <td colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td class="btntd"><input type="button" value="Apply" (click)='doApply()' class="btn btn-success"></td>
+        <td class="btntd"><input type="button" value="cancel" (click)="doCancel()" class="btn btn-danger"></td>
+        
+    </tr>
+ </table>
+  <br><br>
+  <!--<input type="button" value="Apply" (click)="doApplyLeave()">-->
+</div>  
+  
+
+<div>{{message}}</div>
